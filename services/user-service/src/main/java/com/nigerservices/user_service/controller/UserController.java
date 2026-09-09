@@ -1,5 +1,7 @@
 package com.nigerservices.user_service.controller;
 
+import java.util.List;
+
 import com.nigerservices.user_service.dto.CreateUserRequest;
 import com.nigerservices.user_service.dto.UserResponse;
 import com.nigerservices.user_service.service.UserService;

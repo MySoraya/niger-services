@@ -1,7 +1,6 @@
+package com.nigerservices.user_service.service;
 import java.util.List;
 import java.util.stream.Collectors;
-package com.nigerservices.user_service.service;
-
 import com.nigerservices.user_service.dto.CreateUserRequest;
 import com.nigerservices.user_service.dto.UserResponse;
 import com.nigerservices.user_service.entity.User;
