@@ -1,0 +1,39 @@
+services:
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: niger_services
+      POSTGRES_USER: niger_services
+      POSTGRES_PASSWORD: niger_services
+    ports:
+      - "5435:5432"
+    volumes:
+      - niger_services_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U niger_services -d niger_services"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - niger-services-network
+
+  user-service:
+    image: niger-services/user-service:0.0.1
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/niger_services
+      SPRING_DATASOURCE_USERNAME: niger_services
+      SPRING_DATASOURCE_PASSWORD: niger_services
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - niger-services-network
+
+volumes:
+  niger_services_postgres_data:
+
+networks:
+  niger-services-network:
